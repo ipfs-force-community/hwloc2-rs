@@ -95,10 +95,15 @@ pub use ffi::{ObjectType, TypeDepthError, TopologyFlag, CpuBindFlags, MemBindPol
 pub use bitmap::{Bitmap, CpuSet, NodeSet};
 pub use support::{TopologySupport, TopologyDiscoverySupport, TopologyCpuBindSupport,
                   TopologyMemBindSupport};
-pub use topology_object::{TopologyObject, TopologyObjectMemory};
+pub use topology_object::{TopologyObject, TopologyObjectMemory, TopologyObjectInfo};
 
 use num::{ToPrimitive, FromPrimitive};
 use errno::errno;
+
+// Indicate at runtime which hwloc API version was used at build time.
+pub fn get_api_version() -> u32 {
+    unsafe { ffi::hwloc_get_api_version() as u32 }
+}
 
 pub struct Topology {
     topo: *mut ffi::HwlocTopology,

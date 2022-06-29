@@ -285,6 +285,9 @@ pub enum TypeFilter {
 #[link(name = "libhwloc")]
 extern "C" {
 
+    // Indicate at runtime which hwloc API version was used at build time.
+    pub fn hwloc_get_api_version() -> c_uint;
+    
     // === Topology Creation and Destruction ===
 
     pub fn hwloc_topology_init(topology: *mut *mut HwlocTopology) -> c_int;
@@ -491,6 +494,9 @@ extern "C" {
 #[cfg(not(target_os = "windows"))]
 #[link(name = "hwloc")]
 extern "C" {
+
+    // Indicate at runtime which hwloc API version was used at build time.
+    pub fn hwloc_get_api_version() -> c_uint;
 
     // === Topology Creation and Destruction ===
 
